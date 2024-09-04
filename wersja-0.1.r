@@ -451,9 +451,10 @@ observeEvent(input$create_deposit, {
 
   # Update deposit_data dataframe
   new_deposit <- data.frame(
-    'Nazwa lokaty' = deposit_name,
-    'Data założenia' = Sys.Date(),
-    Kwota = deposit_amount
+    'Nazwa lokaty' = as.character(deposit_name),
+    'Data założenia' = as.Date(Sys.Date()),
+    Kwota = as.numeric(deposit_amount),
+    check.names = FALSE
   )
   deposit_data <<- rbind(deposit_data, new_deposit)
   write_delim(deposit_data, deposit_file_path, delim = ";")
